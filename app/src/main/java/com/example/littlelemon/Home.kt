@@ -33,30 +33,30 @@ fun Home(navController: NavHostController) {
             .padding(top = 32.dp),
         verticalArrangement = Arrangement.Top
     ) {
-        // 🔝 App Logo
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "App Logo",
+        // 🔝 Row with centered logo and profile icon on the right
+        Row(
             modifier = Modifier
-                .fillMaxWidth(0.5f)
-                .height(100.dp)
-                .align(Alignment.CenterHorizontally)
-        )
-
-        Spacer(modifier = Modifier.height(24.dp))
-
-        // 👤 Profile Icon below the logo, aligned right
-        Box(
-            modifier = Modifier
-                .fillMaxWidth(),
-            contentAlignment = Alignment.Center
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
+            Spacer(modifier = Modifier.weight(1f)) // Pushes logo toward center
+
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "App Logo",
+                modifier = Modifier
+                    .width(150.dp) // Fixed size for centered alignment
+                    .height(100.dp)
+            )
+
+            Spacer(modifier = Modifier.weight(1f)) // Balances spacing on both sides
+
             Image(
                 painter = painterResource(id = R.drawable.profile),
                 contentDescription = "Profile Icon",
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
-                    .height(200.dp)
+                    .size(60.dp)
                     .clickable {
                         navController.navigate(Profile.route)
                     }
