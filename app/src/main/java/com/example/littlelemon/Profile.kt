@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun Profile(navController: NavController) {
@@ -44,8 +45,9 @@ fun Profile(navController: NavController) {
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "App Logo",
                 modifier = Modifier
-                    .fillMaxWidth(0.4f)
-                    .height(80.dp)
+                    .fillMaxWidth(0.5f)
+                    .height(100.dp)
+                    .align(Alignment.CenterHorizontally)
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -85,7 +87,7 @@ fun Profile(navController: NavController) {
         Button(
             onClick = {
                 sharedPreferences.edit().clear().apply()
-                navController.navigate("onboarding") {
+                navController.navigate(Onboarding.route) {
                     popUpTo(0) { inclusive = true }
                 }
             },
@@ -100,4 +102,11 @@ fun Profile(navController: NavController) {
             Text(text = "Log out", fontWeight = FontWeight.Bold)
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProfilePreview() {
+    val navController = rememberNavController()
+    Profile(navController = navController)
 }
