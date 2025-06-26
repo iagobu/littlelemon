@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
     alias(libs.plugins.kotlin.serialization)
+    id ("kotlin-kapt")
 }
 
 android {
@@ -66,5 +67,6 @@ dependencies {
     implementation ("io.ktor:ktor-client-android:2.1.3")
     implementation ("io.ktor:ktor-client-content-negotiation:2.1.3")
     implementation ("io.ktor:ktor-serialization-kotlinx-json:2.1.3")
+    implementation( "com.github.bumptech.glide:compose:1.0.0-alpha.1")
 
 }

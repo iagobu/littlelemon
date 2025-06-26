@@ -32,8 +32,7 @@ fun Profile(navController: NavHostController) {
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 32.dp),
+            .fillMaxSize(),
         verticalArrangement = Arrangement.Top
     ) {
         // 🔝 Header Row with centered logo and profile icon to the right
