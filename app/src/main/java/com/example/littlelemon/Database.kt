@@ -29,7 +29,7 @@ interface MenuItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg menuItems: MenuItemRoom)
 
-    @Query("SELECT COUNT(*) == 0 FROM menuitemroom")
+    @Query("SELECT COUNT(*) FROM menuitemroom")
     fun count(): Int
 }
 
