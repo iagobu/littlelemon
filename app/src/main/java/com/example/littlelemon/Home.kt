@@ -39,14 +39,39 @@ import com.example.littlelemon.ui.theme.MarkaziFont
 
 @Composable
 fun Home(navController: NavHostController, database: AppDatabase) {
-    val menuItems by database.menuItemDao().getAll().observeAsState(emptyList())
+    //var menuItems by database.menuItemDao().getAll().observeAsState(emptyList())
+    val databaseMenuItems by database.menuItemDao().getAll().observeAsState(emptyList())
     var searchPhrase by remember { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
     // State to hold the selected category
     var selectedCategory by remember { mutableStateOf("") }
+    var orderMenuItems by remember { mutableStateOf(false) }
+
+    // 🚀 Local menuItems variable with sorting
+    var menuItems = if (orderMenuItems) {
+        databaseMenuItems.sortedBy { it.title }
+    } else {
+        databaseMenuItems
+    }
+
+    // 🔍 Apply search filter
+    if (searchPhrase.isNotEmpty()) {
+        menuItems = menuItems.filter {
+            it.title.contains(searchPhrase, ignoreCase = true) ||
+                    it.description.contains(searchPhrase, ignoreCase = true) ||
+                    it.category.contains(searchPhrase, ignoreCase = true)
+        }
+    }
 
     // Get unique categories from menu items
     val categories = menuItems.map { it.category }.distinct()
+
+    // 🗂️ Apply category filter (optional for future)
+    if (selectedCategory.isNotEmpty()) {
+        menuItems = menuItems.filter {
+            it.category == selectedCategory
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -192,17 +217,13 @@ fun Home(navController: NavHostController, database: AppDatabase) {
                         categories.forEach { category ->
                             Button(
                                 onClick = {
-                                    //selectedCategory =
-                                    //if (selectedCategory == category) "" else category
+                                    selectedCategory = if (selectedCategory == category) "" else category
                                 },
                                 colors = ButtonDefaults.buttonColors(
-                                    containerColor = Color(0xFFEDEFEE)
-                                    /*if (selectedCategory == category) Color(
-                                            0xFFF4CE14
-                                        ) else Color(0xFFEDEFEE)*/
+                                    containerColor = if (selectedCategory == category)
+                                        Color(0xFFF4CE14) else Color(0xFFEDEFEE)
                                 ),
-                                modifier = Modifier
-                                    .padding(end = 8.dp)
+                                modifier = Modifier.padding(end = 8.dp)
                             ) {
                                 Text(
                                     text = category,
@@ -211,6 +232,13 @@ fun Home(navController: NavHostController, database: AppDatabase) {
                             }
                         }
                     }
+                }
+            }
+
+
+            if (searchPhrase.isNotEmpty()) {
+                menuItems = menuItems.filter {
+                    it.title.contains(searchPhrase, ignoreCase = true)
                 }
             }
 
