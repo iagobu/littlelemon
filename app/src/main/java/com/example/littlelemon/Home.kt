@@ -227,7 +227,8 @@ fun Home(navController: NavHostController, database: AppDatabase) {
                             ) {
                                 Text(
                                     text = category,
-                                    color = Color(0xFF4F6461)
+                                    color = Color(0xFF4F6461),
+                                    fontWeight = FontWeight.Bold
                                 )
                             }
                         }
@@ -244,7 +245,7 @@ fun Home(navController: NavHostController, database: AppDatabase) {
 
             // 🍽️ Menu Items
             items(menuItems) { menuItem ->
-                MenuItemCard(menuItem)
+                MenuItemRow(menuItem)
             }
         }
     }
