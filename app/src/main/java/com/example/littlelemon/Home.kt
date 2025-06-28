@@ -85,30 +85,29 @@ fun Home(navController: NavHostController, database: AppDatabase) {
         LazyColumn(
             modifier = Modifier.fillMaxSize()
         ) {
-            // 🔝 Header (Logo + Profile)
             item {
-                Row(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                        .padding(top = 8.dp)
                 ) {
-                    Spacer(modifier = Modifier.weight(1f))
-
+                    // Centered Logo
                     Image(
                         painter = painterResource(id = R.drawable.logo),
                         contentDescription = "App Logo",
                         modifier = Modifier
                             .width(150.dp)
                             .height(100.dp)
+                            .align(Alignment.Center) // ✅ Centered horizontally
                     )
 
-                    Spacer(modifier = Modifier.weight(1f))
-
+                    // Profile Icon on the top-right
                     Image(
                         painter = painterResource(id = R.drawable.profile),
                         contentDescription = "Profile Icon",
                         modifier = Modifier
+                            .align(Alignment.TopEnd) // ✅ Top right
+                            .padding(end = 16.dp, top = 24.dp)
                             .size(60.dp)
                             .clickable {
                                 navController.navigate(Profile.route)

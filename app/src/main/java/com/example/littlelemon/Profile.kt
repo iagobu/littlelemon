@@ -31,36 +31,35 @@ fun Profile(navController: NavHostController) {
     val email = sharedPreferences.getString("email", "") ?: ""
 
     Column(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top
     ) {
-        // 🔝 Header Row with centered logo and profile icon to the right
-        Row(
+        // 🔝 Header Box with centered logo and profile icon top-right
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .padding(top = 8.dp)
         ) {
-            Spacer(modifier = Modifier.weight(1f))
-
+            // Centered Logo
             Image(
                 painter = painterResource(id = R.drawable.logo),
                 contentDescription = "App Logo",
                 modifier = Modifier
                     .width(150.dp)
                     .height(100.dp)
+                    .align(Alignment.Center)
             )
 
-            Spacer(modifier = Modifier.weight(1f))
-
+            // Profile icon top-right with padding
             Image(
                 painter = painterResource(id = R.drawable.profile),
                 contentDescription = "Profile Icon",
                 modifier = Modifier
+                    .padding(end = 16.dp, top = 24.dp)
                     .size(60.dp)
+                    .align(Alignment.TopEnd)
                     .clickable {
-                        // Optional: Add navigation if needed
+                        // Optional navigation
                     }
             )
         }
